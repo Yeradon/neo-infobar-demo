@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/layout.json",
+  "id": "com.test.neodemo.layout",
+  "items": [
+    {
+      "key": "title",
+      "type": "text",
+      "rect": [8, 4, 150, 20],
+      "font": { "size": 14, "weight": 600 },
+      "alignment": "left",
+      "value": "OpenDeck Neo"
+    },
+    {
+      "key": "value",
+      "type": "text",
+      "rect": [8, 26, 150, 18],
+      "font": { "size": 12, "weight": 400 },
+      "alignment": "left",
+      "value": "Starting..."
+    },
+    {
+      "key": "indicator",
+      "type": "text",
+      "rect": [165, 12, 60, 26],
+      "font": { "size": 18, "weight": 700 },
+      "alignment": "right",
+      "value": "OK"
+    }
+  ]
+}

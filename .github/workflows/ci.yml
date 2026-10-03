@@ -1,0 +1,73 @@
+name: CI & Package Plugin
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test & Lint (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [20.x, 22.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Syntax check
+        run: node -c main.js
+
+      - name: Validate manifest JSON
+        run: node -e 'JSON.parse(require("fs").readFileSync("manifest.json"))'
+
+      - name: Validate layout JSON
+        run: node -e 'JSON.parse(require("fs").readFileSync("layout.json"))'
+
+  package:
+    name: Package .streamDeckPlugin
+    needs: test
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Install dependencies (production)
+        run: npm install --omit=dev
+
+      - name: Assemble plugin folder
+        run: |
+          PLUGIN_DIR="com.test.neodemo.sdPlugin"
+          mkdir -p "$PLUGIN_DIR"
+          cp -r main.js manifest.json layout.json actionIcon.png pluginIcon.png package.json node_modules "$PLUGIN_DIR/"
+
+      - name: Create streamDeckPlugin bundle (zip format)
+        run: |
+          zip -r "com.test.neodemo.streamDeckPlugin" "com.test.neodemo.sdPlugin"
+
+      - name: Upload .streamDeckPlugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: com.test.neodemo.streamDeckPlugin
+          path: com.test.neodemo.streamDeckPlugin
+          if-no-files-found: error
