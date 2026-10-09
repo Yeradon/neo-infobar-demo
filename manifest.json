@@ -21,7 +21,10 @@
     }
   ],
   "Software": {
-    "MinimumVersion": "7"
+    "MinimumVersion": "7.6"
+  },
+  "Nodejs": {
+    "Version": "20"
   },
   "SDKVersion": 2,
   "Actions": [
