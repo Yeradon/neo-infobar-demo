@@ -2,22 +2,25 @@
   "Name": "Neo Demo",
   "Description": "Demonstration of Stream Deck Neo dynamic Infobar layout",
   "Author": "OpenDeck Team",
-  "Version": "1.0.0",
+  "Version": "1.0.1",
   "Icon": "pluginIcon",
   "Category": "Custom",
+  "CategoryIcon": "pluginIcon",
   "CodePath": "main.js",
   "CodePathLin": "main.js",
   "CodePathMac": "main.js",
   "CodePathWin": "main.js",
   "OS": [
     {
+      "Platform": "mac",
+      "MinimumVersion": "12"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    },
+    {
       "Platform": "linux"
-    },
-    {
-      "Platform": "mac"
-    },
-    {
-      "Platform": "windows"
     }
   ],
   "Software": {

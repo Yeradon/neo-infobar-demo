@@ -1,6 +1,6 @@
 {
   "name": "streamdeck-neo-infobar-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimal demo plugin showcasing Stream Deck Neo Infobar layout and dynamic rendering",
   "main": "main.js",
   "scripts": {
